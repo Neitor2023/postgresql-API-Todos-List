@@ -79,17 +79,78 @@ app.get("/", (req, res) => {
 //     }
 // });
 
+app.get('/categories', async (req,res) => {
+    try {
+        const categories = await Categories.findAll({
+        });
+        res.json(categories);
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+
+app.get('/subcategories', async (req,res) => {
+    try {
+        const subcategories = await Subcategories.findAll({
+            // attributes: ['id', 'firstname', 'lastname', 'username', 'email', 'password'],
+        });
+        res.json(subcategories);
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+
+app.get('/users', async (req,res) => {
+    try {
+        const users = await Users.findAll({
+            attributes: {
+                exclude: ['password'],
+            }
+        });
+        res.json(users);
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
 
 // obtener una publicacion con su categoria y el usuario que la creo
 // obtener las respuestas de la publicacion
+app.get('/todos', async (req,res) => {
+    try {
+        const todos = await Todos.findAll({
+            attributes: ['id', 'userId', 'categoryId', 'title', 'description', 'completed'],
+            include: [
+                {
+                    model: Users,
+                    attributes: ['id', 'username'],
+                },
+                {
+                    model: Categories,
+                    attributes: ['id', 'category'],
+                },
+                {
+                    model: Todos_subcategories,
+                    attributes: ['id','todosId', 'subcategoriesId'],
+                    include: 
+                        {
+                            model: Subcategories,
+                            attributes: ['id', 'subcategory'],
+                        },
+                },
+            ],
+        });
+        res.json(todos);
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+
 app.get('/todos/userId/:userId', async (req,res) => {
     try {
         const {userId} = req.params;
         const todos = await Todos.findAll({
             where:{userId},
-            attributes: {
-                exclude: ['userId', 'categoryId'],
-            },
+            attributes: ['id', 'userId', 'categoryId', 'title', 'description', 'completed'],
             include: [
                 {
                     model: Users,

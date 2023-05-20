@@ -2,6 +2,7 @@ const db = require('../utils/database')
 const { DataTypes } = require('sequelize');
 
 const Todos = db.define('todos',{
+
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -26,7 +27,8 @@ const Todos = db.define('todos',{
         allowNull: false,
     },
     completed:{
-        type: DataTypes.BOOLEAN(false),
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
     }
 });
 
