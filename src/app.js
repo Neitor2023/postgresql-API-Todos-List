@@ -39,46 +39,6 @@ app.get("/", (req, res) => {
     res.send("Servidor Trabajando OK");
 });
 
-// app.post('/users', async (req,res) => {
-//     try {
-//         const newUser = req.body;
-//         await Users.create(newUser);
-//         res.status(201).send();
-//     } catch (error) {
-//         res.status(400).json(error);
-//     }
-// });
-
-// app.post('/subcategories', async (req,res) => {
-//     try {
-//         const newSubcategories = req.body;
-//         await Subcategories.create(newSubcategories);
-//         res.status(201).send();
-//     } catch (error) {
-//         res.status(400).json(error);
-//     }
-// });
-
-// app.post('/categories', async (req,res) => {
-//     try {
-//         const newCategories = req.body;
-//         await Categories.create(newCategories);
-//         res.status(201).send();
-//     } catch (error) {
-//         res.status(400).json(error);
-//     }
-// });
-
-// app.post('/todos', async (req,res) => {
-//     try {
-//         const newTodos = req.body;
-//         await Todos.create(newTodos);
-//         res.status(201).send();
-//     } catch (error) {
-//         res.status(400).json(error);
-//     }
-// });
-
 app.get('/categories', async (req,res) => {
     try {
         const categories = await Categories.findAll({
@@ -92,7 +52,6 @@ app.get('/categories', async (req,res) => {
 app.get('/subcategories', async (req,res) => {
     try {
         const subcategories = await Subcategories.findAll({
-            // attributes: ['id', 'firstname', 'lastname', 'username', 'email', 'password'],
         });
         res.json(subcategories);
     } catch (error) {
@@ -182,7 +141,7 @@ app.put("/todos/:id", async (req,res)=> {
         const { id } = req.params;    
         const { completed } = req.body;
         await Todos.update({completed},{
-            where:{id} // {title: title} completed
+            where:{id}
         });
         res.status(204).send()
     } catch (error) {
@@ -194,7 +153,7 @@ app.delete('/todos/:id', async (req,res)=>{
     try {
         const { id } = req.params;    
         await Todos.destroy({
-            where:{id} // {title: title} completed
+            where:{id}
         });
         res.status(204).send()
     } catch (error) {
