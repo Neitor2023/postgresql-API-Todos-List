@@ -64,6 +64,9 @@ const getUserById = async (req, res) => {
   try {
     const { Id } = req.params;
     const users = await Users.findByPk(Id, {
+      attributes: {
+        exclude: ['password'],
+      }
     });
     res.json(users);
   } catch (error) {
