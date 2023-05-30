@@ -37,7 +37,7 @@ const createUser = async (req,res) => {
 
 const deleteUser = async (req, res) => {
     try {
-        const { id } = req.body;
+        const { id } = req.params;
         await Todo.destroy({
             where:{id}
         });
