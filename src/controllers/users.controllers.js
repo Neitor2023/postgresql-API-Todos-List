@@ -26,7 +26,7 @@ const createUser = async (req,res) => {
         // hasheamos la contraseña
         const hashed = await bcrypt.hash(password, 10);
         console.log("bandera 1")
-        await Users.create({username, email, password: hashed })
+        await Users.create({firstname, lastname, username, email, password: hashed })
         res.status(201).send();
         console.log("bandera 2")
         // asegurarse de que se cumpla con el tipo de dato
