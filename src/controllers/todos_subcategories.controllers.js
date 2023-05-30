@@ -6,7 +6,7 @@ const createTodo_subcategories = async (req, res) => {
         await Todo.create(newTodo_subcategories);
         res.status(201).send();
     } catch (error) {
-        res.status(400).json(error);        
+        res.status(400).json(error);
     }
 };
 
