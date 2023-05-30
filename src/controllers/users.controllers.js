@@ -35,6 +35,18 @@ const createUser = async (req,res) => {
     }
 };
 
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.body;
+        await Todo.destroy({
+            where:{id}
+        });
+        res.status(204).send()
+    } catch (error) {
+        res.status(400).json(error);        
+    }
+};
 module.exports = {
     createUser,
+    deleteUser,
 }

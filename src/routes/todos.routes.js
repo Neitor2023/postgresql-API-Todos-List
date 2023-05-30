@@ -1,6 +1,7 @@
 const { Router } = require('express');
-const { createTodo } = require('../controllers/todos.controllers')
+const { createTodo, deleteTodo } = require('../controllers/todos.controllers')
 const router = Router();
 
 router.post("/todos", createTodo);
+router.delete("/todos/:id", deleteTodo);
 module.exports = router;
