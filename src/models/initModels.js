@@ -11,14 +11,17 @@ const initModels = () => {
     Todos.belongsTo(Categories, {foreignKey: 'categoryId'});
     Categories.hasMany(Todos, {foreignKey: 'categoryId'});
 
-    // Subcategories.belongsTo(Categories, {foreignKey: 'subcategoryId'});
-    // Categories.hasMany(Subcategories, {foreignKey: 'subcategoryId'});
+    // Todos_Subcategories.belongsTo(Todos, {foreignKey: 'todosId'});
+    // Todos.hasMany(Todos_Subcategories, {foreignKey: 'todosId'});
 
-    Todos_Subcategories.belongsTo(Todos, {foreignKey: 'todosId'});
-    Todos.hasMany(Todos_Subcategories, {foreignKey: 'todosId'});
-
-    // Subcategories.belongsTo(Todos_Subcategories, {foreignKey: 'subcategoryId'});
-    // Todos_Subcategories.hasMany(Subcategories, {foreignKey: 'subcategoryId'});
+    Todos_Subcategories.belongsTo(Todos, {
+        foreignKey: 'todosId',
+        onDelete: "CASCADE",
+    });
+    Todos.hasMany(Todos_Subcategories, {
+        foreignKey: 'todosId',
+        onDelete: "CASCADE",
+    });
 
     Todos_Subcategories.belongsTo(Subcategories, {foreignKey: 'subcategoriesId'});
     Subcategories.hasMany(Todos_Subcategories, {foreignKey: 'subcategoriesId'});

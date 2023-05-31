@@ -7,8 +7,31 @@ const Todos_subcategories = require("../models/todos_subcategories.model");
 
 const createTodo = async (req, res) => {
   try {
-    const newTodo = req.body;
-    await Todo.create(newTodo);
+    const { userId, 
+      categoryId, 
+      subcategoriesId, 
+      title, 
+      description, 
+      completed
+    } = req.body;
+    
+    await Todo.create({
+      userId,
+      categoryId,
+      title,
+      description,
+      completed
+    })
+    
+    // const todosId = Todo.id;
+    // await Todo.create(newTodo);
+    
+    // await Todos_subcategories.create({
+    //   // todosId,
+    //   todosId:Todo.id,
+    //   subcategoriesId,
+    // });
+
     res.status(201).send();
   } catch (error) {
     res.status(400).json(error);

@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const createUser = async (req, res) => {
   try {
     // validar la información
-    const { username, email, password } = req.body;
+    const { firstname, lastname, username, email, password } = req.body;
     // asegurarse de que no venga vacio
     if (typeof username !== 'string' || !username) {
       return res.status(400).json({
