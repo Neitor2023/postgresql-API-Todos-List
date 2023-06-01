@@ -47,7 +47,7 @@ const getTodo_SubCategoryBySubcategoriesId = async (req, res) => {
   try {
     const { subcategoriesId } = req.params;
     const todos_subcategories = await Todos_subcategories.findAll({
-      where: subcategoriesId,
+      where:{subcategoriesId},
       include: [
         {
           model: Todos,
